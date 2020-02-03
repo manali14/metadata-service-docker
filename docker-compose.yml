@@ -1,0 +1,25 @@
+version: '3'
+networks:
+  local_net:
+    driver: bridge
+services:
+  api:
+    build:
+      context: .
+    container_name: api
+    ports:
+      - 8080:8080
+    links:
+      - mongo:mongo
+    networks:
+      - local_net
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    networks:
+       - local_net
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017 `

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    image: manalikhanna/metadata-service:latest
+    container_name: api
+    ports:
+      - 8080:8080
+    deploy:
+      replicas: 3
+    links:
+      - mongo:mongo
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    deploy:
+      replicas: 1
+    ports:
+      - 27017:27017
